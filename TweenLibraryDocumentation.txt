@@ -2,10 +2,56 @@
 
 Update these files when changes have been made in a project!!!!!!
 
-Overview
+Tween Interpolate Function only takes in floats and vector3 needs to be expanded to take in other parameter if want to make some stuff
+
+Tween Functions to Make:
+CameraShakePosition
+CameraShakeRotation
+
+LightsColour -- Research if they can be done on URP lights
+LightsIntensity
+LightsShadowStrength
+
+RigidBody3DMove
+RigidBody3DMoveX
+RigidBody3DMoveY
+RigidBody3DMoveZ
+RigidBody3DRotate
+RigidBody3DLookAt
+
+RigidBody2DMove
+RigidBody2DMoveX
+RigidBody2DMoveY
+RigidBody2DJump
+RigidBody2DRotate
+RigidBody2DPath
+
+SpriteRendererColor
+SpriteRendererFade
+
+TransformMove
+TransformMoveX
+TransformMoveY
+TransformMoveZ
+TransformJump
+TransformRotate
+TransformRotateQuaternion
+TransformLookAt
+TransformScale
+TransformScaleX
+TransformScaleY
+TransformScaleZ
+
+ImageColor
+ImageFade
+
+AudioSourceFade
+AudioSourcePitch
+
+Overview:
 The Tweening System is built around the TweenManager, Tween<T>, and ITween interfaces. This system manages and updates animations over time, allowing you to apply smooth transitions to properties like alpha values, scale, and more in Unity.
 
-Core Components
+Core Components:
 ITween Interface
 Defines the methods and properties necessary for a tween:
 
@@ -20,7 +66,7 @@ TweenManager Class
 A singleton that tracks and updates active tweens. Responsible for creating, removing, and updating tweens each frame.
 
 
-Static Helper Functions
+Static Helper Functions:
 The TweenManager class provides several static helper methods to simplify tween creation. Each helper function abstracts the setup process for common tweening tasks like adjusting alpha or scale.
 
 1. TweenSpriteAlpha(GameObject gameObject, float startAlpha, float endAlpha, float duration)
@@ -74,7 +120,7 @@ float myValue = 0;
 TweenManager.TweenFloat(() => myValue, v => myValue = v, 10f, 2f);
 
 
-Customizing Tween Behavior
+Customizing Tween Behavior:
 Each tween can be customized with methods on the Tween<T> object. Examples:
 
 Ease type: tween.SetEase(EaseType.EaseOutQuad)
@@ -87,7 +133,7 @@ Define the Tween Parameters
 Determine the properties you want to tween and define their start and end values, duration, and any other custom behavior.
 
 
-Create a New Static Method in TweenManager
+Create a New Static Method in TweenManager:
 Implement a method similar to TweenSpriteAlpha. 
 This method should:
 Accept the necessary parameters.
@@ -117,7 +163,7 @@ GameObject myObject = ...;
 TweenManager.TweenPositionY(myObject, 0f, 10f, 3f);
 
 
-Ease Types
+Ease Types:
 Ease functions control the transition behavior of the tween over time, allowing for smooth and visually appealing animations. The available easing types are:
 
 Linear
