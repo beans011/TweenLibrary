@@ -1,5 +1,7 @@
 12.11.2024 - First Version of TweenLibrary - https://www.youtube.com/watch?v=43o0FzU55V4&list=WL&index=5&t=71s based of this yt video
 
+Update these files when changes have been made in a project!!!!!!
+
 Overview
 The Tweening System is built around the TweenManager, Tween<T>, and ITween interfaces. This system manages and updates animations over time, allowing you to apply smooth transitions to properties like alpha values, scale, and more in Unity.
 
