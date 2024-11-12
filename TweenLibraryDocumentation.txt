@@ -1,0 +1,132 @@
+12.11.2024 - First Version of TweenLibrary - https://www.youtube.com/watch?v=43o0FzU55V4&list=WL&index=5&t=71s based of this yt video
+
+Overview
+The Tweening System is built around the TweenManager, Tween<T>, and ITween interfaces. This system manages and updates animations over time, allowing you to apply smooth transitions to properties like alpha values, scale, and more in Unity.
+
+Core Components
+ITween Interface
+Defines the methods and properties necessary for a tween:
+
+Methods: Update(), OnCompleteKill(), FullKill(), IsTargetDestroyed(), Pause(), Resume()
+Properties: Target, IsComplete, WasKilled, IsPaused, IgnoreTimeScale, Identifier, DelayTime, onComplete
+Tween<T> Class
+Implements ITween and encapsulates the logic for managing animation of a specific property.
+
+Tween<T> allows animating properties of type T (like float, Vector3, Color).
+It provides flexible configurations, including easing functions, delay, loop, ping-pong effects, and update callbacks.
+TweenManager Class
+A singleton that tracks and updates active tweens. Responsible for creating, removing, and updating tweens each frame.
+
+
+Static Helper Functions
+The TweenManager class provides several static helper methods to simplify tween creation. Each helper function abstracts the setup process for common tweening tasks like adjusting alpha or scale.
+
+1. TweenSpriteAlpha(GameObject gameObject, float startAlpha, float endAlpha, float duration)
+Animates the alpha (transparency) of a GameObject with a SpriteRenderer component.
+
+Parameters:
+gameObject - The GameObject with a SpriteRenderer.
+startAlpha - Initial alpha value.
+endAlpha - Target alpha value.
+duration - Duration of the tween.
+
+Example:
+GameObject mySprite = ...;
+TweenManager.TweenSpriteAlpha(mySprite, 0f, 1f, 2f);
+
+2. TweenSpriteAlpha(SpriteRenderer spriteRenderer, float startAlpha, float endAlpha, float duration)
+This is an overload for tweening the alpha of an individual SpriteRenderer.
+
+Parameters:
+spriteRenderer - The SpriteRenderer to animate.
+startAlpha - Initial alpha.
+endAlpha - Target alpha.
+duration - Duration of the tween.
+
+Example:
+SpriteRenderer spriteRenderer = ...;
+TweenManager.TweenSpriteAlpha(spriteRenderer, 1f, 0.5f, 3f);
+
+3. TweenScale(GameObject gameObject, Vector3 startScale, Vector3 endScale, float duration)
+Animates the scale of a GameObject.
+
+Parameters:
+gameObject - The GameObject to animate.
+startScale - Initial scale.
+endScale - Target scale.
+duration - Duration of the tween.
+Example:
+GameObject myObject = ...;
+TweenManager.TweenScale(myObject, new Vector3(1, 1, 1), new Vector3(2, 2, 2), 1.5f);
+
+4. TweenFloat(Func<float> getFloatToTween, Action<float> setFloatToTween, float endValue, float duration)
+Animates any float value by providing getter and setter delegates.
+
+Parameters:
+getFloatToTween - Function to get the current float value.
+setFloatToTween - Action to set the float value.
+endValue - Target float value.
+duration - Duration of the tween.
+Example:
+float myValue = 0;
+TweenManager.TweenFloat(() => myValue, v => myValue = v, 10f, 2f);
+
+
+Customizing Tween Behavior
+Each tween can be customized with methods on the Tween<T> object. Examples:
+
+Ease type: tween.SetEase(EaseType.EaseOutQuad)
+Ping-pong: tween.SetPingPong(3) (3 loops in ping-pong mode)
+On complete callback: tween.SetOnComplete(() => Debug.Log("Tween complete"))
+Adding New Static Helper Functions
+To create a new static helper function for tweening, follow these steps:
+
+Define the Tween Parameters
+Determine the properties you want to tween and define their start and end values, duration, and any other custom behavior.
+
+
+Create a New Static Method in TweenManager
+Implement a method similar to TweenSpriteAlpha. 
+This method should:
+Accept the necessary parameters.
+Construct a Tween<T> object with those parameters.
+Return the Tween<T> instance for customization if needed.
+Invoke the Tween's Update()
+In the helper function, define the logic to change the desired property over time.
+
+Example: Creating a new tween helper to animate the y position of a GameObject.
+public static Tween<float> TweenPositionY(GameObject gameObject, float startY, float endY, float duration)
+{
+    string identifier = $"{gameObject.transform.GetInstanceID()}_PositionY";
+    Transform transform = gameObject.transform;
+
+    Tween<float> tween = new Tween<float>(gameObject, identifier, startY, endY, duration, value =>
+    {
+        Vector3 position = transform.position;
+        position.y = value;
+        transform.position = position;
+    });
+
+    return tween;
+}
+
+Usage Example:
+GameObject myObject = ...;
+TweenManager.TweenPositionY(myObject, 0f, 10f, 3f);
+
+
+Ease Types
+Ease functions control the transition behavior of the tween over time, allowing for smooth and visually appealing animations. The available easing types are:
+
+Linear
+Quadratic (EaseInQuad, EaseOutQuad, EaseInOutQuad)
+Cubic (EaseInCubic, EaseOutCubic, EaseInOutCubic)
+Quartic (EaseInQuart, EaseOutQuart, EaseInOutQuart)
+Quintic (EaseInQuint, EaseOutQuint, EaseInOutQuint)
+Sine (EaseInSine, EaseOutSine, EaseInOutSine)
+Exponential (EaseInExpo, EaseOutExpo, EaseInOutExpo)
+Circular (EaseInCirc, EaseOutCirc, EaseInOutCirc)
+Back (EaseInBack, EaseOutBack, EaseInOutBack)
+Elastic (EaseInElastic, EaseOutElastic, EaseInOutElastic)
+Bounce (EaseInBounce, EaseOutBounce, EaseInOutBounce)
+You can set the ease type on any tween with .SetEase(EaseType.<Type>).
