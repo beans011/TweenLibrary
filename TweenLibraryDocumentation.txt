@@ -126,7 +126,8 @@ Each tween can be customized with methods on the Tween<T> object. Examples:
 Ease type: tween.SetEase(EaseType.EaseOutQuad)
 Ping-pong: tween.SetPingPong(3) (3 loops in ping-pong mode)
 On complete callback: tween.SetOnComplete(() => Debug.Log("Tween complete"))
-Adding New Static Helper Functions
+
+Adding New Static Helper Functions:
 To create a new static helper function for tweening, follow these steps:
 
 Define the Tween Parameters
