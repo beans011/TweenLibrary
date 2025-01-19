@@ -12,38 +12,36 @@ LightsColour -- Research if they can be done on URP lights
 LightsIntensity
 LightsShadowStrength
 
-RigidBody3DMove
-RigidBody3DMoveX
-RigidBody3DMoveY
-RigidBody3DMoveZ
-RigidBody3DRotate
-RigidBody3DLookAt
+RigidBody3DMove - done
+RigidBody3DMoveX - done
+RigidBody3DMoveY - done
+RigidBody3DMoveZ - done
+RigidBody3DRotate - done
+RigidBody3DLookAt - done
 
-RigidBody2DMove
-RigidBody2DMoveX
-RigidBody2DMoveY
+RigidBody2DMove - done
+RigidBody2DMoveX - done
+RigidBody2DMoveY - done
 RigidBody2DJump
-RigidBody2DRotate
-RigidBody2DPath
+RigidBody2DRotate - done
 
-SpriteRendererColor
-SpriteRendererFade
+SpriteRendererColor - done
+SpriteRendererFade - done
 
-TransformMove
-TransformMoveX
-TransformMoveY
-TransformMoveZ
+TransformMove - done
+TransformMoveX - done
+TransformMoveY - done
+TransformMoveZ - done
 TransformJump
-TransformRotate
-TransformRotateQuaternion
-TransformLookAt
-TransformScale
-TransformScaleX
-TransformScaleY
-TransformScaleZ
+TransformRotate - done
+TransformLookAt - done
+TransformScale - done
+TransformScaleX - done
+TransformScaleY - done
+TransformScaleZ - done
 
-ImageColor
-ImageFade
+ImageColor - done
+ImageFade - done
 
 AudioSourceFade
 AudioSourcePitch
@@ -179,3 +177,11 @@ Back (EaseInBack, EaseOutBack, EaseInOutBack)
 Elastic (EaseInElastic, EaseOutElastic, EaseInOutElastic)
 Bounce (EaseInBounce, EaseOutBounce, EaseInOutBounce)
 You can set the ease type on any tween with .SetEase(EaseType.<Type>).
+
+
+Example of a tween with a few extras added on:
+
+TweenManager.TweenScale(gameObject, _startScale, Vector3.one * 1.25f, 0.75f)
+.SetEase(EaseType.EaseInOutBack)
+.SetPingPong(-1)
+.SetOnPercentCompleted(0.5f, OnHalfWay);

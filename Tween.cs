@@ -138,14 +138,24 @@ public class Tween<T> : ITween
             return (T)(object)Mathf.LerpUnclamped(startFloat, endFloat, t);
         }
 
-        if (start is Vector3 startVector &&  end is Vector3 endVector)
+        if (start is Vector3 startVector3 &&  end is Vector3 endVector3)
         {
-            return (T)(object)Vector3.LerpUnclamped(startVector, endVector, t);
+            return (T)(object)Vector3.LerpUnclamped(startVector3, endVector3, t);
+        }
+
+        if (start is Vector2 startVector2 && end is Vector2 endVector2)
+        {
+            return (T)(object)Vector2.LerpUnclamped(startVector2, endVector2, t);
         }
 
         if (start is Color startColor && end is Color endColor)
         {
             return (T)(object)Color.Lerp(startColor, endColor, t);
+        }  
+
+        if (start is int startInt && end is int endInt)
+        {
+            return (T)(object)Mathf.LerpUnclamped(startInt, endInt, t);
         }
 
         throw new NotImplementedException($"Interpoaltion for type {typeof(T)} is not implemented");
